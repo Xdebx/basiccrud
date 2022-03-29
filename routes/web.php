@@ -48,3 +48,23 @@ Route::get('profile', [
   Route::post('/signin', [
         'uses' => 'userController@postSignin',
         'as' => 'user.signin']);
+
+
+
+
+
+Route::get('add-to-cart/{id}', [
+    'uses' => 'ItemController@getAddToCart',
+    'as' => 'item.addToCart'
+]);
+
+Route::get('shopping-cart', [
+    'uses' => 'ItemController@getCart',
+    'as' => 'item.shoppingCart'
+]);
+
+
+Route::get('remove/{id}',[
+        'uses'=>'ItemController@getRemoveItem',
+        'as' => 'item.remove'
+    ]);
