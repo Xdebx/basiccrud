@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome'); 
-});
+// Route::get('/', function () {
+//     return view('welcome'); 
+// });
 
 // Route::resource('customer', 'CustomerController');
 // Route::resource('item', 'ItemController');
@@ -49,10 +49,6 @@ Route::get('profile', [
         'uses' => 'userController@postSignin',
         'as' => 'user.signin']);
 
-
-
-
-
 Route::get('add-to-cart/{id}', [
     'uses' => 'ItemController@getAddToCart',
     'as' => 'item.addToCart'
@@ -67,4 +63,15 @@ Route::get('shopping-cart', [
 Route::get('remove/{id}',[
         'uses'=>'ItemController@getRemoveItem',
         'as' => 'item.remove'
+    ]);
+
+Route::get('reduce/{id}',[
+        'uses' => 'ItemController@getReduceByOne',
+        'as' => 'item.reduceByOne'
+    ]);
+
+Route::get('checkout',[
+        'uses' => 'ItemController@postCheckout',
+        'as' => 'checkout',
+        'middleware' =>'auth'
     ]);

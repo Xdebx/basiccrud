@@ -3,11 +3,12 @@
  use Session;
  class Cart
 {
-        public $items = null;
+       public $items = null;
         public $totalQty = 0;
-    	public $totalPrice = 0;
+        public $totalPrice = 0;
 
-    public function __construct($oldCart) {
+   public function __construct($oldCart) {
+
         if($oldCart) {
             $this->items = $oldCart->items;
             $this->totalQty = $oldCart->totalQty;
@@ -23,14 +24,14 @@
             }
         }
        //$storedItem['qty'] += $item->qty;
-        $storedItem['qty']++;
+       $storedItem['qty']++;
         $storedItem['price'] = $item->sell_price * $storedItem['qty'];
         $this->items[$id] = $storedItem;
         $this->totalQty++;
         $this->totalPrice += $item->sell_price;
-    }
+        }
 
-       public function reduceByOne($id){
+    public function reduceByOne($id){
         $this->items[$id]['qty']--;
         $this->items[$id]['price']-= $this->items[$id]['item']['sell_price'];
         $this->totalQty --;
@@ -39,7 +40,8 @@
             unset($this->items[$id]);
         }
     }
-        public function removeItem($id){
+
+     public function removeItem($id){
         $this->totalQty -= $this->items[$id]['qty'];
         $this->totalPrice -= $this->items[$id]['price'];
         unset($this->items[$id]);

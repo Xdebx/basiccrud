@@ -17,11 +17,19 @@ class UserController extends Controller
             'password' => 'required| min:4'
         ]);
          $user = new User([
-            'name' => $request->name,
+            'name' => $request->input('fname').' '.$request->lname,
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password'))
         ]);
          $user->save();
+         $customer = new Customer;
+         $customer->user_id = $user->id;
+         $customer->fname = $request->fname;
+         $customer->lname = $request->lname;
+         $customer->addressline = $request->addressline;
+         $customer->phone = $request->phone;
+         $customer->zipcode = $request->zipcode;
+         $customer->save();
          Auth::login($user);
          return redirect()->route('user.profile');
     }
